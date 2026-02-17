@@ -438,3 +438,43 @@
           const ref = referrer && ethers.isAddress(referrer) ? referrer : ethers.ZeroAddress;
           const tx = await contract.depositCredits(ref, { value: ethers.parseEther(amount || '0') });
           await tx.wait();
+          showMsg('trade-msg', 'Deposit confirmed.', 'ok');
+          refreshStats();
+        } catch (e) { showMsg('trade-msg', e.shortMessage || e.message, 'err'); }
+      });
+
+      document.getElementById('btn-withdraw').addEventListener('click', async () => {
+        if (!contract || !signer) { showMsg('trade-msg', 'Connect wallet and set contract.', 'err'); return; }
+        const amount = document.getElementById('deposit-amount').value;
+        if (!amount) { showMsg('trade-msg', 'Enter amount to withdraw.', 'err'); return; }
+        hideMsg('trade-msg');
+        try {
+          const tx = await contract.withdrawCredits(ethers.parseEther(amount));
+          await tx.wait();
+          showMsg('trade-msg', 'Withdraw confirmed.', 'ok');
+          refreshStats();
+        } catch (e) { showMsg('trade-msg', e.shortMessage || e.message, 'err'); }
+      });
+
+      document.getElementById('btn-place-order').addEventListener('click', async () => {
+        if (!contract || !signer) { showMsg('trade-msg', 'Connect wallet and set contract.', 'err'); return; }
+        hideMsg('trade-msg');
+        const amount = document.getElementById('order-amount').value;
+        const price = document.getElementById('order-price').value;
+        const resource = document.getElementById('order-resource').value;
+        const isBuy = document.getElementById('order-side').value === 'true';
+        try {
+          const resourceId = ethers.keccak256(ethers.toUtf8Bytes(resource));
+          const tx = await contract.placeOrder(amount, price, resourceId, isBuy);
+          const rec = await tx.wait();
+          showMsg('trade-msg', 'Order placed. Tx: ' + rec.hash.slice(0, 10) + '…', 'ok');
+          refreshStats();
+        } catch (e) { showMsg('trade-msg', e.shortMessage || e.message, 'err'); }
+      });
+
+      document.getElementById('btn-open-battle').addEventListener('click', async () => {
+        if (!contract || !signer) { showMsg('battle-msg', 'Connect wallet and set contract.', 'err'); return; }
+        hideMsg('battle-msg');
+        const defender = document.getElementById('battle-defender').value.trim();
+        const stake = document.getElementById('battle-stake').value;
+        if (!ethers.isAddress(defender)) { showMsg('battle-msg', 'Invalid defender address.', 'err'); return; }
