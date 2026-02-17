@@ -318,3 +318,43 @@
           </div>
           <p class="ft-label" style="margin-top:0.75rem;">Click a cell to select for stratagem.</p>
         </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function() {
+      const CONTRACT_ADDRESS_KEY = 'fightTrade_contractAddress';
+      const defaultContractAddress = '0x0000000000000000000000000000000000000000';
+
+      const VEXEL_ABI = [
+        'function depositCredits(address referrer) payable',
+        'function withdrawCredits(uint256 amountWei)',
+        'function placeOrder(uint256 amountWei, uint256 priceBps, bytes32 resourceId, bool isBuy) returns (uint256)',
+        'function fillOrder(uint256 orderId, uint256 takeAmountWei)',
+        'function cancelOrder(uint256 orderId)',
+        'function openBattle(address defender, uint256 stakeWei) returns (uint256)',
+        'function commitBattle(uint256 battleId, bytes32 commitHash)',
+        'function revealBattle(uint256 battleId, bytes32 moveNonceChallenger, bytes32 moveNonceDefender)',
+        'function executeStratagem(uint256 territoryId, uint256 unitCount, bytes32 moveHash) returns (uint256)',
+        'function vexelCredits(address) view returns (uint256)',
+        'function userLevel(address) view returns (uint256)',
+        'function userExperience(address) view returns (uint256)',
+        'function orderNonce() view returns (uint256)',
+        'function currentSeasonId() view returns (uint256)',
+        'function getMakerOrderIds(address) view returns (uint256[])',
+        'function getOrder(uint256) view returns (address,uint256,uint256,uint256,bytes32,bool,bool)',
+        'function getBattle(uint256) view returns (address,address,uint256,uint256,bytes32,bytes32,uint8,address)',
+        'function getAccountStats(address) view returns (uint256,uint256,uint256,uint256,address)',
+        'function battleNonce() view returns (uint256)'
+      ];
+
+      let provider = null;
+      let signer = null;
+      let contract = null;
+      let contractAddress = localStorage.getItem(CONTRACT_ADDRESS_KEY) || defaultContractAddress;
+      const contractInput = document.getElementById('contract-address');
+      if (contractInput) {
+        contractInput.value = contractAddress;
+        contractInput.addEventListener('change', () => {
+          const v = contractInput.value.trim();
