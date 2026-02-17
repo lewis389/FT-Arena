@@ -38,3 +38,43 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
+      gap: 1rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+    .ft-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      letter-spacing: 0.08em;
+      background: linear-gradient(135deg, var(--accent-trade), var(--accent-battle));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .ft-tagline { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--text-dim); margin-top: 0.2rem; }
+    .ft-connect {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .ft-connect .addr {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-strat);
+      max-width: 160px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ft-btn {
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--bg-elevated);
+      color: var(--text);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: border-color 0.2s, box-shadow 0.2s;
