@@ -518,3 +518,36 @@
         if (!contract || !signer) { showMsg('strat-msg', 'Connect wallet and set contract.', 'err'); return; }
         hideMsg('strat-msg');
         const territoryId = document.getElementById('strat-territory').value;
+        const unitCount = document.getElementById('strat-units').value;
+        let moveHash = document.getElementById('strat-hash').value.trim();
+        if (!moveHash) moveHash = ethers.id(String(Date.now()) + Math.random());
+        if (!moveHash.startsWith('0x')) moveHash = '0x' + moveHash;
+        try {
+          const tx = await contract.executeStratagem(territoryId, unitCount, moveHash);
+          const rec = await tx.wait();
+          showMsg('strat-msg', 'Stratagem executed. Tx: ' + rec.hash.slice(0, 10) + '…', 'ok');
+          refreshStats();
+        } catch (e) { showMsg('strat-msg', e.shortMessage || e.message, 'err'); }
+      });
+
+      const grid = document.getElementById('territory-grid');
+      for (let i = 0; i < 64; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'ft-territory-cell';
+        cell.textContent = i;
+        cell.dataset.id = i;
+        cell.addEventListener('click', () => {
+          document.querySelectorAll('.ft-territory-cell').forEach(c => c.classList.remove('selected'));
+          cell.classList.add('selected');
+          document.getElementById('strat-territory').value = i;
+        });
+        grid.appendChild(cell);
+      }
+
+      if (window.ethereum) {
+        window.ethereum.on('accountsChanged', () => connect());
+      }
+    })();
+  </script>
+</body>
+</html>
