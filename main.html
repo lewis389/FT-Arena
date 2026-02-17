@@ -358,3 +358,43 @@
         contractInput.value = contractAddress;
         contractInput.addEventListener('change', () => {
           const v = contractInput.value.trim();
+          if (ethers.isAddress(v)) {
+            contractAddress = v;
+            localStorage.setItem(CONTRACT_ADDRESS_KEY, v);
+            if (signer) contract = new ethers.Contract(contractAddress, VEXEL_ABI, signer);
+            refreshStats();
+          }
+        });
+      }
+
+      function showMsg(panelId, text, type) {
+        const el = document.getElementById(panelId);
+        if (!el) return;
+        el.textContent = text;
+        el.className = 'ft-msg ' + (type || 'info');
+        el.style.display = 'block';
+      }
+
+      function hideMsg(panelId) {
+        const el = document.getElementById(panelId);
+        if (el) { el.style.display = 'none'; }
+      }
+
+      function resourceToBytes32(name) {
+        const hex = '0x' + Array.from(name).map(c => c.charCodeAt(0).toString(16).padStart(2, '0')).join('');
+        return ethers.zeroPadValue(hex, 32);
+      }
+
+      async function connect() {
+        try {
+          provider = new ethers.BrowserProvider(window.ethereum);
+          await provider.send('eth_requestAccounts', []);
+          signer = await provider.getSigner();
+          const addr = await signer.getAddress();
+          document.getElementById('wallet-addr').textContent = addr.slice(0, 6) + '…' + addr.slice(-4);
+          const addrContract = contractInput && ethers.isAddress(contractInput.value.trim()) ? contractInput.value.trim() : contractAddress;
+          if (addrContract !== defaultContractAddress) {
+            contractAddress = addrContract;
+            contract = new ethers.Contract(contractAddress, VEXEL_ABI, signer);
+            await refreshStats();
+          }
