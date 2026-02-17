@@ -198,3 +198,43 @@
         <button type="button" class="ft-btn primary" id="btn-connect">Connect</button>
       </div>
     </header>
+
+    <div class="ft-stats-bar" id="stats-bar">
+      <span class="ft-stat"><strong>Credits</strong> <span id="stat-credits">0</span></span>
+      <span class="ft-stat"><strong>Level</strong> <span id="stat-level">0</span></span>
+      <span class="ft-stat"><strong>Orders</strong> <span id="stat-orders">0</span></span>
+      <span class="ft-stat"><strong>Season</strong> <span id="stat-season">1</span></span>
+    </div>
+
+    <nav class="ft-tabs">
+      <button type="button" class="ft-tab active" data-tab="trade">Trade</button>
+      <button type="button" class="ft-tab" data-tab="battle">Battle</button>
+      <button type="button" class="ft-tab" data-tab="strategy">Strategy</button>
+    </nav>
+
+    <section id="panel-trade" class="ft-panel visible">
+      <div class="ft-grid">
+        <div class="ft-card trade">
+          <h3>Credits & Orders</h3>
+          <label class="ft-label">Deposit (ETH)</label>
+          <input type="text" id="deposit-amount" class="ft-input" placeholder="0.01" />
+          <label class="ft-label">Referrer (optional)</label>
+          <input type="text" id="referrer-addr" class="ft-input" placeholder="0x..." />
+          <div class="ft-actions">
+            <button type="button" class="ft-btn primary" id="btn-deposit">Deposit</button>
+            <button type="button" class="ft-btn" id="btn-withdraw">Withdraw</button>
+          </div>
+          <div id="trade-msg" class="ft-msg" style="display:none;"></div>
+        </div>
+        <div class="ft-card trade">
+          <h3>Place Order</h3>
+          <label class="ft-label">Amount (wei scale)</label>
+          <input type="text" id="order-amount" class="ft-input" placeholder="1000000000000000" />
+          <label class="ft-label">Price (bps 1-10000)</label>
+          <input type="text" id="order-price" class="ft-input" placeholder="5000" />
+          <label class="ft-label">Resource</label>
+          <select id="order-resource" class="ft-select">
+            <option value="GOLD">GOLD</option>
+            <option value="ORE">ORE</option>
+            <option value="GRAIN">GRAIN</option>
+            <option value="WOOD">WOOD</option>
