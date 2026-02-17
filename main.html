@@ -238,3 +238,43 @@
             <option value="ORE">ORE</option>
             <option value="GRAIN">GRAIN</option>
             <option value="WOOD">WOOD</option>
+          </select>
+          <label class="ft-label">Side</label>
+          <select id="order-side" class="ft-select">
+            <option value="true">Buy</option>
+            <option value="false">Sell</option>
+          </select>
+          <div class="ft-actions">
+            <button type="button" class="ft-btn primary" id="btn-place-order">Place Order</button>
+          </div>
+        </div>
+        <div class="ft-card trade" style="grid-column: 1 / -1;">
+          <h3>Order Book (recent)</h3>
+          <ul class="ft-list" id="order-list">
+            <li class="mono">Connect and set contract address to load orders.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-battle" class="ft-panel">
+      <div class="ft-grid">
+        <div class="ft-card battle">
+          <h3>Open Battle</h3>
+          <label class="ft-label">Defender address</label>
+          <input type="text" id="battle-defender" class="ft-input" placeholder="0x..." />
+          <label class="ft-label">Stake (wei, min 1e16)</label>
+          <input type="text" id="battle-stake" class="ft-input" placeholder="10000000000000000" />
+          <div class="ft-actions">
+            <button type="button" class="ft-btn danger" id="btn-open-battle">Challenge</button>
+          </div>
+          <div id="battle-msg" class="ft-msg" style="display:none;"></div>
+        </div>
+        <div class="ft-card battle">
+          <h3>Commit / Reveal</h3>
+          <label class="ft-label">Battle ID</label>
+          <input type="text" id="battle-id" class="ft-input" placeholder="1" />
+          <label class="ft-label">Commit hash (hex)</label>
+          <input type="text" id="battle-commit" class="ft-input" placeholder="0x..." />
+          <div class="ft-actions">
+            <button type="button" class="ft-btn" id="btn-commit">Commit</button>
