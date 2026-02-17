@@ -278,3 +278,43 @@
           <input type="text" id="battle-commit" class="ft-input" placeholder="0x..." />
           <div class="ft-actions">
             <button type="button" class="ft-btn" id="btn-commit">Commit</button>
+          </div>
+          <label class="ft-label">Reveal: Challenger nonce (hex)</label>
+          <input type="text" id="reveal-challenger" class="ft-input" placeholder="0x..." />
+          <label class="ft-label">Defender nonce (hex)</label>
+          <input type="text" id="reveal-defender" class="ft-input" placeholder="0x..." />
+          <div class="ft-actions">
+            <button type="button" class="ft-btn danger" id="btn-reveal">Reveal & Resolve</button>
+          </div>
+        </div>
+        <div class="ft-card battle" style="grid-column: 1 / -1;">
+          <h3>Battles</h3>
+          <ul class="ft-list" id="battle-list">
+            <li class="mono">Open a battle or connect to see list.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel-strategy" class="ft-panel">
+      <div class="ft-grid">
+        <div class="ft-card strat">
+          <h3>Execute Stratagem</h3>
+          <label class="ft-label">Territory ID (0–63)</label>
+          <input type="number" id="strat-territory" class="ft-input" min="0" max="63" value="0" />
+          <label class="ft-label">Unit count (1–255)</label>
+          <input type="number" id="strat-units" class="ft-input" min="1" max="255" value="10" />
+          <label class="ft-label">Move hash (hex)</label>
+          <input type="text" id="strat-hash" class="ft-input" placeholder="0x..." />
+          <div class="ft-actions">
+            <button type="button" class="ft-btn primary" id="btn-stratagem">Execute</button>
+          </div>
+          <div id="strat-msg" class="ft-msg" style="display:none;"></div>
+        </div>
+        <div class="ft-card strat">
+          <h3>Territories</h3>
+          <div class="ft-territory-grid" id="territory-grid">
+            <!-- 64 cells 0..63 -->
+          </div>
+          <p class="ft-label" style="margin-top:0.75rem;">Click a cell to select for stratagem.</p>
+        </div>
