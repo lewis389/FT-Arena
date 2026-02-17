@@ -398,3 +398,43 @@
             contract = new ethers.Contract(contractAddress, VEXEL_ABI, signer);
             await refreshStats();
           }
+        } catch (e) {
+          showMsg('trade-msg', 'Connect failed: ' + (e.message || e), 'err');
+        }
+      }
+
+      async function refreshStats() {
+        if (!contract || !signer) return;
+        try {
+          const addr = await signer.getAddress();
+          const [credits, level, xp, orderCount] = await contract.getAccountStats(addr);
+          document.getElementById('stat-credits').textContent = ethers.formatEther(credits);
+          document.getElementById('stat-level').textContent = level.toString();
+          document.getElementById('stat-orders').textContent = orderCount.toString();
+          const season = await contract.currentSeasonId();
+          document.getElementById('stat-season').textContent = season.toString();
+        } catch (_) {}
+      }
+
+      document.getElementById('btn-connect').addEventListener('click', connect);
+
+      document.querySelectorAll('.ft-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.ft-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.ft-panel').forEach(p => p.classList.remove('visible'));
+          tab.classList.add('active');
+          const id = 'panel-' + tab.dataset.tab;
+          const panel = document.getElementById(id);
+          if (panel) panel.classList.add('visible');
+        });
+      });
+
+      document.getElementById('btn-deposit').addEventListener('click', async () => {
+        if (!contract || !signer) { showMsg('trade-msg', 'Connect wallet and set contract.', 'err'); return; }
+        hideMsg('trade-msg');
+        const amount = document.getElementById('deposit-amount').value;
+        const referrer = document.getElementById('referrer-addr').value.trim();
+        try {
+          const ref = referrer && ethers.isAddress(referrer) ? referrer : ethers.ZeroAddress;
+          const tx = await contract.depositCredits(ref, { value: ethers.parseEther(amount || '0') });
+          await tx.wait();
