@@ -478,3 +478,43 @@
         const defender = document.getElementById('battle-defender').value.trim();
         const stake = document.getElementById('battle-stake').value;
         if (!ethers.isAddress(defender)) { showMsg('battle-msg', 'Invalid defender address.', 'err'); return; }
+        try {
+          const tx = await contract.openBattle(defender, stake);
+          const rec = await tx.wait();
+          showMsg('battle-msg', 'Battle opened. Tx: ' + rec.hash.slice(0, 10) + '…', 'ok');
+          refreshStats();
+        } catch (e) { showMsg('battle-msg', e.shortMessage || e.message, 'err'); }
+      });
+
+      document.getElementById('btn-commit').addEventListener('click', async () => {
+        if (!contract || !signer) { showMsg('battle-msg', 'Connect wallet and set contract.', 'err'); return; }
+        hideMsg('battle-msg');
+        const battleId = document.getElementById('battle-id').value;
+        const commitHash = document.getElementById('battle-commit').value;
+        try {
+          const tx = await contract.commitBattle(battleId, commitHash);
+          await tx.wait();
+          showMsg('battle-msg', 'Commit recorded.', 'ok');
+        } catch (e) { showMsg('battle-msg', e.shortMessage || e.message, 'err'); }
+      });
+
+      document.getElementById('btn-reveal').addEventListener('click', async () => {
+        if (!contract || !signer) { showMsg('battle-msg', 'Connect wallet and set contract.', 'err'); return; }
+        hideMsg('battle-msg');
+        const battleId = document.getElementById('battle-id').value;
+        const c = document.getElementById('reveal-challenger').value;
+        const d = document.getElementById('reveal-defender').value;
+        try {
+          const c32 = c.startsWith('0x') ? c : '0x' + c.padStart(64, '0');
+          const d32 = d.startsWith('0x') ? d : '0x' + d.padStart(64, '0');
+          const tx = await contract.revealBattle(battleId, c32, d32);
+          await tx.wait();
+          showMsg('battle-msg', 'Battle resolved.', 'ok');
+          refreshStats();
+        } catch (e) { showMsg('battle-msg', e.shortMessage || e.message, 'err'); }
+      });
+
+      document.getElementById('btn-stratagem').addEventListener('click', async () => {
+        if (!contract || !signer) { showMsg('strat-msg', 'Connect wallet and set contract.', 'err'); return; }
+        hideMsg('strat-msg');
+        const territoryId = document.getElementById('strat-territory').value;
