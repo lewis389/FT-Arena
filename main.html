@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fight Trade — Arena · Trade · Stratagem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.9.0/dist/ethers.umd.min.js"></script>
+  <style>
+    :root {
+      --bg-deep: #0a0c0f;
+      --bg-panel: #12161c;
+      --bg-elevated: #1a1f28;
+      --border: #2a3340;
+      --accent-trade: #e8b84a;
+      --accent-battle: #c94b4b;
+      --accent-strat: #4bc97a;
+      --text: #e2e6ec;
+      --text-dim: #7d8796;
+      --glow-trade: rgba(232, 184, 74, 0.25);
+      --glow-battle: rgba(201, 75, 75, 0.25);
+      --glow-strat: rgba(75, 201, 122, 0.2);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--bg-deep);
+      color: var(--text);
+      min-height: 100vh;
+      background-image: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(40,50,70,0.4), transparent),
+                        linear-gradient(180deg, var(--bg-deep) 0%, #0d1117 100%);
+    }
+    .app-wrap { max-width: 1280px; margin: 0 auto; padding: 1.5rem; }
+    header.ft-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
