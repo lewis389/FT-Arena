@@ -78,3 +78,43 @@
       cursor: pointer;
       border-radius: 4px;
       transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .ft-btn:hover { border-color: var(--accent-trade); box-shadow: 0 0 12px var(--glow-trade); }
+    .ft-btn.primary { background: linear-gradient(135deg, #2a3a1a, #1a2a12); border-color: var(--accent-strat); color: var(--accent-strat); }
+    .ft-btn.primary:hover { box-shadow: 0 0 14px var(--glow-strat); }
+    .ft-btn.danger { border-color: var(--accent-battle); color: var(--accent-battle); }
+    .ft-btn.danger:hover { box-shadow: 0 0 12px var(--glow-battle); }
+    .ft-tabs {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .ft-tab {
+      padding: 0.7rem 1.2rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .ft-tab:hover { color: var(--text); border-color: var(--text-dim); }
+    .ft-tab.active { background: var(--bg-elevated); color: var(--accent-trade); border-color: var(--accent-trade); box-shadow: 0 0 12px var(--glow-trade); }
+    .ft-panel { display: none; }
+    .ft-panel.visible { display: block; }
+    .ft-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 900px) { .ft-grid { grid-template-columns: 1fr; } }
+    .ft-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    .ft-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
