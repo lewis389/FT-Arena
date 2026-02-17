@@ -118,3 +118,43 @@
       font-size: 1rem;
       font-weight: 600;
       margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .ft-card.trade h3 { color: var(--accent-trade); }
+    .ft-card.battle h3 { color: var(--accent-battle); }
+    .ft-card.strat h3 { color: var(--accent-strat); }
+    .ft-label { display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.35rem; }
+    .ft-input, .ft-select {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.9rem;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+    .ft-input:focus, .ft-select:focus { outline: none; border-color: var(--accent-trade); }
+    .ft-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .ft-list { list-style: none; }
+    .ft-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .ft-list li:last-child { border-bottom: none; }
+    .ft-list .mono { font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; color: var(--text-dim); }
+    .ft-stats-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .ft-stat { font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; }
