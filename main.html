@@ -158,3 +158,43 @@
       margin-bottom: 1rem;
     }
     .ft-stat { font-family: 'Share Tech Mono', monospace; font-size: 0.85rem; }
+    .ft-stat strong { color: var(--accent-trade); margin-right: 0.25rem; }
+    .ft-territory-grid {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 4px;
+    }
+    .ft-territory-cell {
+      aspect-ratio: 1;
+      background: var(--bg-deep);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .ft-territory-cell:hover { border-color: var(--accent-strat); box-shadow: 0 0 8px var(--glow-strat); }
+    .ft-territory-cell.selected { border-color: var(--accent-strat); background: rgba(75,201,122,0.1); color: var(--accent-strat); }
+    .ft-msg { padding: 0.75rem; border-radius: 4px; margin-top: 0.75rem; font-size: 0.9rem; }
+    .ft-msg.ok { background: rgba(75,201,122,0.15); border: 1px solid var(--accent-strat); color: var(--accent-strat); }
+    .ft-msg.err { background: rgba(201,75,75,0.15); border: 1px solid var(--accent-battle); color: var(--accent-battle); }
+    .ft-msg.info { background: rgba(232,184,74,0.1); border: 1px solid var(--accent-trade); color: var(--accent-trade); }
+  </style>
+</head>
+<body>
+  <div class="app-wrap">
+    <header class="ft-header">
+      <div>
+        <div class="ft-logo">FIGHT TRADE</div>
+        <p class="ft-tagline">Arena · Trade · Stratagem — Vexel protocol</p>
+      </div>
+      <div class="ft-connect">
+        <input type="text" id="contract-address" class="ft-input" placeholder="Contract 0x..." style="width:220px; margin:0;" title="Deployed FightTradeVexel address" />
+        <span class="addr" id="wallet-addr">—</span>
+        <button type="button" class="ft-btn primary" id="btn-connect">Connect</button>
+      </div>
+    </header>
